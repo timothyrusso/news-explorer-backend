@@ -1,0 +1,23 @@
+{
+  "name": "news-explorer-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timothyrusso/news-explorer-backend.git"
+  },
+  "author": "Timothy Russo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/timothyrusso/news-explorer-backend/issues"
+  },
+  "homepage": "https://github.com/timothyrusso/news-explorer-backend#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
