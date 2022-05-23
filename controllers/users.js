@@ -20,7 +20,7 @@ const getCurrentUser = (req, res, next) => {
 
 // POST /signup
 const createUser = (req, res, next) => {
-  const { name, about, avatar, email, password } = req.body;
+  const { email, password, name } = req.body;
   User.findOne({ email })
     .then((user) => {
       if (user) {
