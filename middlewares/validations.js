@@ -58,7 +58,7 @@ const validateUserId = celebrate({
 // articleId validation
 const validateArticleId = celebrate({
   params: Joi.object().keys({
-    cardId: Joi.string().hex().message("The id is invalid").messages({
+    articleId: Joi.string().hex().message("The id is invalid").messages({
       "string.empty": 'The "Id" filed must be filled in',
     }),
   }),
