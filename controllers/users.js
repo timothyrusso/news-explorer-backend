@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const { REQUEST_SUCCEDED, RESOURCE_CREATED } = require("../utils/constants");
+const { NODE_ENV, JWT_SECRET } = process.env;
 const UnauthorizedError = require("../errors/unauthorized-err");
 const ConflictError = require("../errors/conflict-err");
 const BadRequestError = require("../errors/bad-request-err");
