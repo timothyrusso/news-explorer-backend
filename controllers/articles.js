@@ -4,10 +4,12 @@ const ForbiddenError = require("../errors/forbidden-err");
 const BadRequestError = require("../errors/bad-request-err");
 const { REQUEST_SUCCEDED, RESOURCE_CREATED } = require("../utils/constants");
 
-const getUserArticles = (req, res, next) =>
-  Article.find({})
+const getUserArticles = (req, res, next) => {
+  const id = req.user._id;
+  Article.find({ owner: id })
     .then((articles) => res.status(REQUEST_SUCCEDED).send(articles))
     .catch(next);
+};
 
 const saveArticle = (req, res, next) => {
   const { keyword, title, text, date, source, link, image } = req.body;
