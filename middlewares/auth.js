@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 const ForbiddenError = require('../errors/forbidden-err');
+const { JWT_DEVELOPMENT } = require('../utils/constants');
 
 // Middleware that check on every request if the user have the authorization
 module.exports = (req, res, next) => {
@@ -15,7 +16,7 @@ module.exports = (req, res, next) => {
   let payload;
 
   try {
-    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'casual-secret-key');
+    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : JWT_DEVELOPMENT);
   } catch (err) {
     return next(new ForbiddenError('Authorization Required'));
   }

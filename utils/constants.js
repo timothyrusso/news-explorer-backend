@@ -1,10 +1,12 @@
-const rateLimit = require("express-rate-limit");
+const rateLimit = require('express-rate-limit');
 
 const REQUEST_SUCCEDED = 200;
 const RESOURCE_CREATED = 201;
 const INTERNAL_SERVER_ERROR = 500;
 
-const mongoDbAdress = "mongodb://localhost:27017/newsdb";
+const mongoDbAdress = 'mongodb://localhost:27017/newsdb';
+
+const JWT_DEVELOPMENT = 'casual-secret-key';
 
 const limiter = rateLimit({
   // Limit repeated requests to public APIs and/or endpoints
@@ -17,5 +19,6 @@ module.exports = {
   RESOURCE_CREATED,
   INTERNAL_SERVER_ERROR,
   mongoDbAdress,
+  JWT_DEVELOPMENT,
   limiter,
 };
