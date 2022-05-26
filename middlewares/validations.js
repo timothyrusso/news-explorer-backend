@@ -104,5 +104,5 @@ module.exports = {
   validateUserCreation,
   validateUserId,
   validateArticleId,
-  saveArticleValidation, // eslint-disable-line
+  saveArticleValidation,
 };
