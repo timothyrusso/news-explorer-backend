@@ -6,12 +6,12 @@ const { errors } = require('celebrate');
 const routes = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 require('dotenv').config();
-const { mongoDbAdress, limiter } = require('./utils/constants');
+const { limiter, FRONTEND_URL } = require('./utils/constants');
 
 const app = express();
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, MONGO_URL, NODE_ENV } = process.env;
 
-mongoose.connect(mongoDbAdress, {
+mongoose.connect(NODE_ENV === 'production' ? MONGO_URL : 'mongodb://localhost:27017/newsdb', {
   useNewUrlParser: true,
 });
 
@@ -25,7 +25,9 @@ app.use(helmet());
 app.use(requestLogger); // enabling the request logger
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000/');
+    res.header('Access-Control-Allow-Origin',
+    NODE_ENV === 'production' ? FRONTEND_URL : 'http://localhost:3000/',
+  );
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept',
