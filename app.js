@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const routes = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const error = require('./middlewares/error');
 require('dotenv').config();
 const { limiter, FRONTEND_URL } = require('./utils/constants');
 
@@ -15,8 +16,6 @@ mongoose.connect(NODE_ENV === 'production' ? MONGO_URL : 'mongodb://localhost:27
   useNewUrlParser: true,
 });
 
-app.use(limiter);
-
 app.use(express.json()); // To parse the incoming requests with JSON payloads
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
@@ -24,8 +23,11 @@ app.use(helmet());
 
 app.use(requestLogger); // enabling the request logger
 
+app.use(limiter);
+
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin',
+  res.header(
+    'Access-Control-Allow-Origin',
     NODE_ENV === 'production' ? FRONTEND_URL : 'http://localhost:3000/',
   );
   res.header(
@@ -45,12 +47,7 @@ app.use(errorLogger); // enabling the error logger
 
 app.use(errors()); // celebrate error handler
 
-app.use((err, req, res, next) => {
-  const { statusCode = 500, message } = err;
-  res.status(statusCode).send({
-    message: statusCode === 500 ? 'An error occurred on the server' : message,
-  });
-});
+app.use(error); // error middleware
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`); // eslint-disable-line no-console
