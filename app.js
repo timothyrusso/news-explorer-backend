@@ -14,6 +14,12 @@ const { PORT = 3000, MONGO_URL, NODE_ENV } = process.env;
 
 mongoose.connect(NODE_ENV === 'production' ? MONGO_URL : 'mongodb://localhost:27017/newsdb', {
   useNewUrlParser: true,
+}, (err) => {
+  if (err) {
+    console.log('Error connecting to MongoDB:', err);
+  } else {
+    console.log('Connected to MongoDB');
+  }
 });
 
 app.use(express.json()); // To parse the incoming requests with JSON payloads
