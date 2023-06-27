@@ -6,7 +6,7 @@ const INTERNAL_SERVER_ERROR = 500;
 
 const JWT_DEVELOPMENT = 'casual-secret-key';
 
-const FRONTEND_URL = 'https://newsexplorer-timothyrusso.students.nomoreparties.sbs';
+const FRONTEND_URL = 'https://newsexplorer23.netlify.app/';
 
 const limiter = rateLimit({
   // Limit repeated requests to public APIs and/or endpoints
