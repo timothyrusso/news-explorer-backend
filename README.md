@@ -2,9 +2,9 @@
 
 This repository contains the backend API of the NewsExplorer project that features user authorization and user registration and handles articles and users.
 
-- Endpoint of the API: https://api.newsexplorer-timothyrusso.students.nomoreparties.sbs/
+- Endpoint of the API: https://news-explorer-cc5g.onrender.com/
 
-- Endpoint for the live project: https://newsexplorer-timothyrusso.students.nomoreparties.sbs/
+- Endpoint for the live project: https://newsexplorer23.netlify.app/
 
 ## Running the project  
 
