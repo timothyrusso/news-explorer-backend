@@ -1,7 +1,18 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
+import mongoose, { Document, Schema } from 'mongoose';
+import validator from 'validator';
 
-const articleSchema = new mongoose.Schema({
+interface IArticle extends Document {
+  keyword: string;
+  title: string;
+  text: string;
+  date: string;
+  source: string;
+  link: string;
+  image: string;
+  owner: Schema.Types.ObjectId;
+}
+
+const articleSchema: Schema = new mongoose.Schema({
   keyword: {
     type: String,
     required: true,
@@ -26,7 +37,7 @@ const articleSchema = new mongoose.Schema({
     type: String,
     required: [true, 'url required'],
     validate: {
-      validator: (v) => validator.isURL(v),
+      validator: (v: string) => validator.isURL(v),
       message: 'This field must be a link.',
     },
   },
@@ -34,7 +45,7 @@ const articleSchema = new mongoose.Schema({
     type: String,
     required: [true, 'url required'],
     validate: {
-      validator: (v) => validator.isURL(v),
+      validator: (v: string) => validator.isURL(v),
       message: 'This field must be a link.',
     },
   },
@@ -50,4 +61,4 @@ articleSchema.methods.toJSON = function () { // eslint-disable-line
   return obj;
 };
 
-module.exports = mongoose.model('article', articleSchema);
+export default mongoose.model<IArticle>('article', articleSchema);

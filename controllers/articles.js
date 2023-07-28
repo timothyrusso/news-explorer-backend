@@ -1,4 +1,4 @@
-const Article = require('../models/article');
+const Article = require('../models/article').default;
 const NotFoundError = require('../errors/not-found-err');
 const ForbiddenError = require('../errors/forbidden-err');
 const BadRequestError = require('../errors/bad-request-err');
