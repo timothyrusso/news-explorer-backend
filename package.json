@@ -1,6 +1,7 @@
 {
   "name": "news-explorer-backend",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -21,6 +22,7 @@
   },
   "homepage": "https://github.com/timothyrusso/news-explorer-backend#readme",
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.17",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^20.4.5",

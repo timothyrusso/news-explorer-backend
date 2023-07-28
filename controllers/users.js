@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../models/user');
+const User = require('../models/user.ts').default;
+
 const {
   REQUEST_SUCCEDED, RESOURCE_CREATED, JWT_DEVELOPMENT,
 } = require('../utils/constants');
