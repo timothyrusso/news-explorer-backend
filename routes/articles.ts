@@ -1,13 +1,15 @@
-const router = require('express').Router();
-const {
+import { Router } from 'express';
+import {
   getUserArticles,
   saveArticle,
   deleteArticle,
-} = require('../controllers/articles');
-const {
+} from '../controllers/articles';
+import {
   saveArticleValidation,
   validateArticleId,
-} = require('../middlewares/validations');
+} from '../middlewares/validations';
+
+const router = Router();
 
 router.get('/articles', getUserArticles);
 
@@ -15,4 +17,4 @@ router.post('/articles', saveArticleValidation, saveArticle);
 
 router.delete('/articles/:articleId', validateArticleId, deleteArticle);
 
-module.exports = router;
+export default router;
