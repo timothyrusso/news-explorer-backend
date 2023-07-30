@@ -1,12 +1,12 @@
-const rateLimit = require('express-rate-limit');
+import rateLimit from 'express-rate-limit';
 
-const REQUEST_SUCCEDED = 200;
-const RESOURCE_CREATED = 201;
-const INTERNAL_SERVER_ERROR = 500;
+const REQUEST_SUCCEDED: number = 200;
+const RESOURCE_CREATED: number = 201;
+const INTERNAL_SERVER_ERROR: number = 500;
 
-const JWT_DEVELOPMENT = 'casual-secret-key';
+const JWT_DEVELOPMENT: string = 'casual-secret-key';
 
-const FRONTEND_URL = 'https://newsexplorer23.netlify.app/';
+const FRONTEND_URL: string = 'https://newsexplorer23.netlify.app/';
 
 const limiter = rateLimit({
   // Limit repeated requests to public APIs and/or endpoints
