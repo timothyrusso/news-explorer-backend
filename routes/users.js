@@ -1,6 +1,8 @@
-const router = require('express').Router();
-const { getCurrentUser } = require('../controllers/users');
+import { Router } from 'express';
+import { getCurrentUser } from '../controllers/users';
+
+const router = Router();
 
 router.get('/users/me', getCurrentUser);
 
-module.exports = router;
+export default router;
