@@ -1,11 +1,14 @@
-const jwt = require('jsonwebtoken');
+import jwt, { JwtPayload } from 'jsonwebtoken';
+import { Request, Response, NextFunction } from 'express';
+import ForbiddenError from '../errors/forbidden-err';
+import { JWT_DEVELOPMENT } from '../utils/constants';
 
-const { NODE_ENV, JWT_SECRET } = process.env;
-const ForbiddenError = require('../errors/forbidden-err');
-const { JWT_DEVELOPMENT } = require('../utils/constants');
+interface RequestWithUser extends Request {
+  user?: string | JwtPayload;
+}
 
 // Middleware that check on every request if the user have the authorization
-module.exports = (req, res, next) => {
+  export default (req: RequestWithUser, res: Response, next: NextFunction): void => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
@@ -16,7 +19,7 @@ module.exports = (req, res, next) => {
   let payload;
 
   try {
-    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : JWT_DEVELOPMENT);
+    payload = jwt.verify(token, process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : JWT_DEVELOPMENT);
   } catch (err) {
     return next(new ForbiddenError('Authorization Required'));
   }

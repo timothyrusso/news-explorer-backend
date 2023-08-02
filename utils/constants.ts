@@ -14,7 +14,7 @@ const limiter = rateLimit({
   max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
 });
 
-module.exports = {
+export {
   REQUEST_SUCCEDED,
   RESOURCE_CREATED,
   INTERNAL_SERVER_ERROR,
