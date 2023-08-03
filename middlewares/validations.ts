@@ -1,8 +1,8 @@
-const { celebrate, Joi } = require('celebrate');
-const validator = require('validator');
+import { celebrate, Joi, Segments, CelebrateError } from 'celebrate';
+import validator from 'validator';
 
 // URL custom validator
-const validateURL = (value, helpers) => {
+const validateURL = (value: string, helpers: any) => {
   if (validator.isURL(value)) {
     return value;
   }
@@ -10,8 +10,8 @@ const validateURL = (value, helpers) => {
 };
 
 // Login validation
-const validateAuthentication = celebrate({
-  body: Joi.object().keys({
+export const validateAuthentication = celebrate({
+  [Segments.BODY]: Joi.object().keys({
     email: Joi.string()
       .required()
       .email()
@@ -26,8 +26,8 @@ const validateAuthentication = celebrate({
 });
 
 // User creation validation
-const validateUserCreation = celebrate({
-  body: Joi.object().keys({
+export const validateUserCreation = celebrate({
+  [Segments.BODY]: Joi.object().keys({
     email: Joi.string()
       .required()
       .email()
@@ -47,8 +47,8 @@ const validateUserCreation = celebrate({
 });
 
 // userId validation
-const validateUserId = celebrate({
-  params: Joi.object().keys({
+export const validateUserId = celebrate({
+  [Segments.PARAMS]: Joi.object().keys({
     userId: Joi.string().hex().message('The id is invalid').messages({
       'string.empty': 'The \'Id\' filed must be filled in',
     }),
@@ -56,8 +56,8 @@ const validateUserId = celebrate({
 });
 
 // articleId validation
-const validateArticleId = celebrate({
-  params: Joi.object().keys({
+export const validateArticleId = celebrate({
+  [Segments.PARAMS]: Joi.object().keys({
     articleId: Joi.string().hex().message('The id is invalid').messages({
       'string.empty': 'The \'Id\' filed must be filled in',
     }),
@@ -65,8 +65,8 @@ const validateArticleId = celebrate({
 });
 
 // save article validator
-const saveArticleValidation = celebrate({
-  body: {
+export const saveArticleValidation = celebrate({
+  [Segments.BODY]: {
     keyword: Joi.string().required().messages({
       'string.empty': 'The \'keyword\' filed must be filled in',
     }),
@@ -98,11 +98,3 @@ const saveArticleValidation = celebrate({
       }),
   },
 });
-
-module.exports = {
-  validateAuthentication,
-  validateUserCreation,
-  validateUserId,
-  validateArticleId,
-  saveArticleValidation,
-};
