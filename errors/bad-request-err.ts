@@ -1,8 +1,10 @@
 class BadRequestError extends Error {
-  constructor(message) {
+  statusCode: number;
+  
+  constructor(message?: string) {
     super(message);
     this.statusCode = 400;
   }
 }
 
-module.exports = BadRequestError;
+export default BadRequestError;
