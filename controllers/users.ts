@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { Request as ExpressRequest, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import User from '../models/user';
 import UnauthorizedError from '../errors/unauthorized-err';
 import ConflictError from '../errors/conflict-err';
@@ -9,16 +9,9 @@ import NotFoundError from '../errors/not-found-err';
 import { 
   REQUEST_SUCCEDED, RESOURCE_CREATED, JWT_DEVELOPMENT 
 } from '../utils/constants';
+import { UserPayload, Request, ValidationError } from './types';
 
 const { NODE_ENV, JWT_SECRET } = process.env;
-
-interface UserPayload {
-  _id: string;
-}
-
-interface Request extends ExpressRequest {
-  user: UserPayload;
-}
 
 // GET users/me
 export const getCurrentUser = (req: Request, res: Response, next: NextFunction) => {
@@ -30,10 +23,6 @@ export const getCurrentUser = (req: Request, res: Response, next: NextFunction) 
     })
     .catch(next);
 };
-
-interface ValidationError extends Error {
-  errors: Record<string, { message: string }>;
-}
 
 // POST /signup
 export const createUser = (req: Request, res: Response, next: NextFunction) => {
