@@ -1,19 +1,27 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const User = require('../models/user.ts').default;
-
-const {
-  REQUEST_SUCCEDED, RESOURCE_CREATED, JWT_DEVELOPMENT,
-} = require('../utils/constants');
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { Request as ExpressRequest, Response, NextFunction } from 'express';
+import User from '../models/user';
+import UnauthorizedError from '../errors/unauthorized-err';
+import ConflictError from '../errors/conflict-err';
+import BadRequestError from '../errors/bad-request-err';
+import NotFoundError from '../errors/not-found-err';
+import { 
+  REQUEST_SUCCEDED, RESOURCE_CREATED, JWT_DEVELOPMENT 
+} from '../utils/constants';
 
 const { NODE_ENV, JWT_SECRET } = process.env;
-const UnauthorizedError = require('../errors/unauthorized-err');
-const ConflictError = require('../errors/conflict-err');
-const BadRequestError = require('../errors/bad-request-err');
-const NotFoundError = require('../errors/not-found-err');
+
+interface UserPayload {
+  _id: string;
+}
+
+interface Request extends ExpressRequest {
+  user: UserPayload;
+}
 
 // GET users/me
-const getCurrentUser = (req, res, next) => {
+export const getCurrentUser = (req: Request, res: Response, next: NextFunction) => {
   const id = req.user._id;
   User.findById(id)
     .orFail(() => new NotFoundError('No user found with that id'))
@@ -23,8 +31,12 @@ const getCurrentUser = (req, res, next) => {
     .catch(next);
 };
 
+interface ValidationError extends Error {
+  errors: Record<string, { message: string }>;
+}
+
 // POST /signup
-const createUser = (req, res, next) => {
+export const createUser = (req: Request, res: Response, next: NextFunction) => {
   const { email, password, name } = req.body;
   User.findOne({ email })
     .then((user) => {
@@ -42,7 +54,7 @@ const createUser = (req, res, next) => {
       name,
     }))
     .then((user) => res.status(RESOURCE_CREATED).send({ data: user }))
-    .catch((err) => {
+    .catch((err: ValidationError) => {
       if (err.name === 'ValidationError') {
         next(
           new BadRequestError(
@@ -58,7 +70,7 @@ const createUser = (req, res, next) => {
 };
 
 // POST /signin
-const login = (req, res, next) => {
+export const login = (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
@@ -72,10 +84,4 @@ const login = (req, res, next) => {
     .catch(() => {
       next(new UnauthorizedError('Incorrect email or password'));
     });
-};
-
-module.exports = {
-  createUser,
-  login,
-  getCurrentUser,
 };
