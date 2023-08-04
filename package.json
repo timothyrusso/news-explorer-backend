@@ -5,7 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node app.js",
+    "start": "npx tsc && node app.js",
     "dev": "nodemon app.ts",
     "lint": "npx eslint .",
     "build": "tsc",
