@@ -1,4 +1,4 @@
-import { celebrate, Joi, Segments, CelebrateError } from 'celebrate';
+import { celebrate, Joi, Segments } from 'celebrate';
 import validator from 'validator';
 
 // URL custom validator

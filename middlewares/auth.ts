@@ -2,9 +2,10 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import ForbiddenError from '../errors/forbidden-err';
 import { JWT_DEVELOPMENT } from '../utils/constants';
+import { UserPayload } from '../controllers/types';
 
 interface RequestWithUser extends Request {
-  user?: string | JwtPayload;
+  user: UserPayload;
 }
 
 // Middleware that check on every request if the user have the authorization
@@ -24,7 +25,7 @@ interface RequestWithUser extends Request {
     return next(new ForbiddenError('Authorization Required'));
   }
 
-  req.user = payload; // assigning the payload to the request object
+  req.user = payload as UserPayload; // assigning the payload to the request object
 
   return next(); // sending the request to the next middleware
 };

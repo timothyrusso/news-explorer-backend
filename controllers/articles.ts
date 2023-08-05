@@ -1,10 +1,10 @@
-import { NextFunction, Response } from 'express';
+import { NextFunction, Response, Request } from 'express';
 import Article from '../models/article';
 import NotFoundError from '../errors/not-found-err';
 import ForbiddenError from '../errors/forbidden-err';
 import BadRequestError from '../errors/bad-request-err';
 import { REQUEST_SUCCEDED, RESOURCE_CREATED } from '../utils/constants';
-import { ValidationError, Request } from './types';
+import { ValidationError } from './types';
 
 export const getUserArticles = (req: Request, res: Response, next: NextFunction) => {
   const id = req.user._id;
