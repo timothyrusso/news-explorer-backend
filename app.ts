@@ -15,12 +15,14 @@ const app = express();
 
 const { PORT = 3000, MONGO_URL = 'mongodb://localhost:27017/newsdb', NODE_ENV = 'development' } = process.env;
 
-mongoose.connect(NODE_ENV === 'production' ? MONGO_URL : 'mongodb://localhost:27017/newsdb', (err) => {
-  if (err) {
-    console.log('Error connecting to MongoDB:', err);
-  } else {
-    console.log('Connected to MongoDB');
-  }
+mongoose.connect(NODE_ENV === 'production' ? MONGO_URL : 'mongodb://localhost:27017/newsdb')
+
+mongoose.connection.on('connected', () => {
+  console.log('Connected to MongoDB');
+});
+
+mongoose.connection.on('error', (err) => {
+  console.log('Error connecting to MongoDB:', err);
 });
 
 app.use(express.json()); // To parse the incoming requests with JSON payloads
