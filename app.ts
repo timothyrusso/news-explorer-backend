@@ -3,7 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import mongoose from 'mongoose';
 import { errors } from 'celebrate';
-import routes from './routes';
+import routes from './routes/index';
 import { requestLogger, errorLogger } from './middlewares/logger';
 import error from './middlewares/error';
 import { config as dotenvConfig } from 'dotenv';
