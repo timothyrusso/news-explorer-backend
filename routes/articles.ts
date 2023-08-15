@@ -3,11 +3,11 @@ import {
   getUserArticles,
   saveArticle,
   deleteArticle,
-} from '../controllers/articles';
+} from '../controllers/articles.js';
 import {
   saveArticleValidation,
   validateArticleId,
-} from '../middlewares/validations';
+} from '../middlewares/validations.js';
 
 const router = Router();
 

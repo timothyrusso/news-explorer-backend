@@ -1,13 +1,13 @@
 import { Router } from 'express';
-import auth from '../middlewares/auth';
-import usersRouter from './users';
-import articlesRouter from './articles';
-import NotFoundError from '../errors/not-found-err';
-import { createUser, login } from '../controllers/users';
+import auth from '../middlewares/auth.js';
+import usersRouter from './users.js';
+import articlesRouter from './articles.js';
+import NotFoundError from '../errors/not-found-err.js';
+import { createUser, login } from '../controllers/users.js';
 import {
   validateAuthentication,
   validateUserCreation,
-} from '../middlewares/validations';
+} from '../middlewares/validations.js';
 
 const router = Router();
 

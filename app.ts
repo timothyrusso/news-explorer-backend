@@ -4,10 +4,10 @@ import helmet from 'helmet';
 import mongoose from 'mongoose';
 import { errors } from 'celebrate';
 import routes from './routes/index.js';
-import { requestLogger, errorLogger } from './middlewares/logger';
-import error from './middlewares/error';
+import { requestLogger, errorLogger } from './middlewares/logger.js';
+import error from './middlewares/error.js';
 import { config as dotenvConfig } from 'dotenv';
-import { limiter, FRONTEND_URL } from './utils/constants';
+import { limiter, FRONTEND_URL } from './utils/constants.js';
 
 dotenvConfig();
 

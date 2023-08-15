@@ -1,8 +1,8 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-import ForbiddenError from '../errors/forbidden-err';
-import { JWT_DEVELOPMENT } from '../utils/constants';
-import { UserPayload } from '../controllers/types';
+import ForbiddenError from '../errors/forbidden-err.js';
+import { JWT_DEVELOPMENT } from '../utils/constants.js';
+import { UserPayload } from '../controllers/types.js';
 
 interface RequestWithUser extends Request {
   user: UserPayload;

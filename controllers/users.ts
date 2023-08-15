@@ -1,15 +1,15 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { Response, NextFunction, Request } from 'express';
-import User from '../models/user';
-import UnauthorizedError from '../errors/unauthorized-err';
-import ConflictError from '../errors/conflict-err';
-import BadRequestError from '../errors/bad-request-err';
-import NotFoundError from '../errors/not-found-err';
+import User from '../models/user.js';
+import UnauthorizedError from '../errors/unauthorized-err.js';
+import ConflictError from '../errors/conflict-err.js';
+import BadRequestError from '../errors/bad-request-err.js';
+import NotFoundError from '../errors/not-found-err.js';
 import { 
   REQUEST_SUCCEDED, RESOURCE_CREATED, JWT_DEVELOPMENT 
-} from '../utils/constants';
-import { UserPayload, ValidationError } from './types';
+} from '../utils/constants.js';
+import { UserPayload, ValidationError } from './types.js';
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
