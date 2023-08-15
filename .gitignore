@@ -19,6 +19,7 @@ node_modules
 
 # Build
 /build
+/dist
 
 # Other
 todo.txt
